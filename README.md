@@ -8,9 +8,9 @@ The source code lives in a separate, private repository.
 
 Grab the latest Windows installer:
 
-**[life-intelligence-windows-x86_64-installer.exe](https://github.com/upload-j/li-releases/releases/latest/download/life-intelligence-windows-x86_64-installer.exe)** (~128 MB)
+**[life-intelligence-windows-x86_64-installer.exe](https://github.com/upload-j/li-hub/releases/latest/download/life-intelligence-windows-x86_64-installer.exe)** (~128 MB)
 
-Or browse all releases on the [Releases](https://github.com/upload-j/li-releases/releases) page.
+Or browse all releases on the [Releases](https://github.com/upload-j/li-hub/releases) page.
 
 ## Install (Windows)
 
