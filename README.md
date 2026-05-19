@@ -19,6 +19,13 @@ Or browse all releases on the [Releases](https://github.com/upload-j/li-hub/rele
 3. The installer copies the hub to `C:\Program Files\Life Intelligence\`, opens inbound TCP port `17777` in the firewall, and optionally adds a Startup-on-login shortcut.
 4. The hub launches automatically when finished. A small data folder opens at `C:\Users\<you>\.life-intelligence\` — this is where your captured data lives, on your machine.
 
+## Verify
+
+Each release publishes a SHA-256 checksum and is scanned by VirusTotal.
+
+- **SHA-256** of v0.2.1: `674eace87b926aed9a29b5ab646b8f657b43f7b9f5d6a4f7ab37ed75965c785c` — full file at [`CHECKSUMS.txt`](https://github.com/upload-j/li-hub/releases/latest/download/CHECKSUMS.txt).
+- **VirusTotal:** [0 vendors flagged the v0.2.1 installer](https://www.virustotal.com/gui/file/674eace87b926aed9a29b5ab646b8f657b43f7b9f5d6a4f7ab37ed75965c785c).
+
 ## Set up phone + watch
 
 The phone and watch apps are in Google Play closed testing. Visit the landing page to be added to the tester list, then install the app from Play Store. Once installed, the phone app's setup flow walks you through pairing with the hub.
