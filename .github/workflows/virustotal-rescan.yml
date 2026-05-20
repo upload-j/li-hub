@@ -1,0 +1,44 @@
+name: VirusTotal rescan
+
+# Re-submit the Windows installer URL to VirusTotal whenever a new release is
+# published, so the "verified safe" badge on intfc.co/li reflects the freshly
+# released binary rather than the previously-cached analysis.
+#
+# Requires a repository secret VT_API_KEY (VirusTotal public-tier key is fine).
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch: {}
+
+jobs:
+  rescan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit installer URL to VirusTotal
+        env:
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${VT_API_KEY:-}" ]; then
+            echo "VT_API_KEY secret is not set on this repo" >&2
+            exit 1
+          fi
+          URL="https://github.com/upload-j/li-hub/releases/latest/download/life-intelligence-windows-x86_64-installer.exe"
+          curl --fail-with-body -sS \
+            -X POST "https://www.virustotal.com/api/v3/urls" \
+            -H "x-apikey: $VT_API_KEY" \
+            -H "content-type: application/x-www-form-urlencoded" \
+            --data-urlencode "url=$URL"
+          echo
+          echo "submitted: $URL"
+
+      - name: Warm intfc.co badge cache
+        # Give VT ~90s to fetch and analyze, then prod our endpoint a few times
+        # so the edge cache revalidates against the new analysis ASAP.
+        run: |
+          sleep 90
+          for i in 1 2 3; do
+            curl -sS "https://www.intfc.co/api/virus-scan?cb=release-${GITHUB_SHA}-${i}" >/dev/null || true
+            sleep 20
+          done
